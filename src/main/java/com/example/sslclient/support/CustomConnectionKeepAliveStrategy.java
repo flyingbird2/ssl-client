@@ -11,6 +11,6 @@ import org.apache.http.protocol.HttpContext;
 public class CustomConnectionKeepAliveStrategy implements ConnectionKeepAliveStrategy {
     @Override
     public long getKeepAliveDuration(HttpResponse httpResponse, HttpContext httpContext) {
-        return 30;
+        return 10;
     }
 }
