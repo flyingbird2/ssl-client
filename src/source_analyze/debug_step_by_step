@@ -1,0 +1,9 @@
+1、SpringApplicationBuilder
+，
+1、1 SpringApplicationBuilder中2个变量SpringApplication application和变量ConfigurableApplicationContext context是什么关系？
+在一开始从main方法进入的时候，以上2个变量都是为空的
+
+ private Class<? extends StandardEnvironment> deduceEnvironmentClass() { 把日志都处理好了
+ 然后才进入创建SpringApplication，初始化一些默认值
+ 比如webApplicationType的赋值为SERVLET
+ 比如getSpringFactoriesInstances使用默认类加载器，此时的接口为interface org.springframework.context.ApplicationContextInitializer

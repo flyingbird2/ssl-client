@@ -30,7 +30,7 @@ import java.util.concurrent.TimeUnit;
 public class SslClientApplication {
 
 	@Value("${security.key-store}")
-	private Resource keyStore;//
+	private Resource keyStore;
 	@Value("${security.key-pass}")
 	private String keyPass;
 
