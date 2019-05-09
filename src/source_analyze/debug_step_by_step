@@ -6,4 +6,26 @@
  private Class<? extends StandardEnvironment> deduceEnvironmentClass() { 把日志都处理好了
  然后才进入创建SpringApplication，初始化一些默认值
  比如webApplicationType的赋值为SERVLET
- 比如getSpringFactoriesInstances使用默认类加载器，此时的接口为interface org.springframework.context.ApplicationContextInitializer
+ 比如getSpringFactoriesInstances使用默认类加载器，
+ 此时的接口为interface org.springframework.context.ApplicationContextInitializer
+
+ 在loadSpringFactories中
+ 用类加载器会加载META-INF/spring.factories
+ 其中路径的值为jar:file:/Users/xiaohuihui/.m2/repository/org/springframework/boot/spring-boot/2.1.4.RELEASE/spring-boot-2.1.4.RELEASE.jar!/META-INF/spring.factories
+ 说明是从JAR包中取值
+
+ URL-->Resource-->Properties
+ 通过加载spring.factories
+ "org.springframework.boot.diagnostics.FailureAnalyzer" -> "org.springframework.boot.diagnostics.analyzer.BeanCurrentlyInCreationFailureAnalyzer,org.springframework.boot.diagnostics.analyzer.BeanDefinitionOverrideFailureAnalyzer,org.springframework.boot.diagnostics.analyzer.BeanNotOfRequiredTypeFailureAnalyzer,org.springframework.boot.diagnostics.analyzer.BindFailureAnalyzer,org.springframework.boot.diagnostics.analyzer.BindValidationFailureAnalyzer,org.springframework.boot.diagnostics.analyzer.UnboundConfigurationPropertyFailureAnalyzer,org.springframework.boot.diagnostics.analyzer.ConnectorStartFailureAnalyzer,org.springframework.boot.diagnostics.analyzer.NoSuchMethodFailureAnalyzer,org.springframework.boot.diagnostics.analyzer.NoUniqueBeanDefinitionFailureAnalyzer,org.springframework.boot.diagnostics.analyzer.PortInUseFailureAnalyzer,org.springframework.boot.diagnostics.analyzer.ValidationExceptionFailureAnalyzer,org.springframework.boot.diagnostics.analyzer.InvalidConfigurationPropertyNameFailureAnalyzer,org.springframework.boot.diagnostics.anal"
+ "org.springframework.boot.env.EnvironmentPostProcessor" -> "org.springframework.boot.cloud.CloudFoundryVcapEnvironmentPostProcessor,org.springframework.boot.env.SpringApplicationJsonEnvironmentPostProcessor,org.springframework.boot.env.SystemEnvironmentPropertySourceEnvironmentPostProcessor"
+ "org.springframework.boot.SpringApplicationRunListener" -> "org.springframework.boot.context.event.EventPublishingRunListener"
+ "org.springframework.context.ApplicationContextInitializer" -> "org.springframework.boot.context.ConfigurationWarningsApplicationContextInitializer,org.springframework.boot.context.ContextIdApplicationContextInitializer,org.springframework.boot.context.config.DelegatingApplicationContextInitializer,org.springframework.boot.web.context.ServerPortInfoApplicationContextInitializer"
+ "org.springframework.boot.env.PropertySourceLoader" -> "org.springframework.boot.env.PropertiesPropertySourceLoader,org.springframework.boot.env.YamlPropertySourceLoader"
+ "org.springframework.context.ApplicationListener" -> "org.springframework.boot.ClearCachesApplicationListener,org.springframework.boot.builder.ParentContextCloserApplicationListener,org.springframework.boot.context.FileEncodingApplicationListener,org.springframework.boot.context.config.AnsiOutputApplicationListener,org.springframework.boot.context.config.ConfigFileApplicationListener,org.springframework.boot.context.config.DelegatingApplicationListener,org.springframework.boot.context.logging.ClasspathLoggingApplicationListener,org.springframework.boot.context.logging.LoggingApplicationListener,org.springframework.boot.liquibase.LiquibaseServiceLocatorApplicationListener"
+ "org.springframework.boot.diagnostics.FailureAnalysisReporter" -> "org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter"
+ "org.springframework.boot.SpringBootExceptionReporter" -> "org.springframework.boot.diagnostics.FailureAnalyzers"
+
+ 接着加载另外一个spring.factories
+ jar:file:/Users/xiaohuihui/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/2.1.4.RELEASE/spring-boot-autoconfigure-2.1.4.RELEASE.jar!/META-INF/spring.factories
+
+
