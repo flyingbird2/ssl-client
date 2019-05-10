@@ -27,5 +27,31 @@
 
  接着加载另外一个spring.factories
  jar:file:/Users/xiaohuihui/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/2.1.4.RELEASE/spring-boot-autoconfigure-2.1.4.RELEASE.jar!/META-INF/spring.factories
+ 将每个类的全限定名拿到后
+ 通过以下2步完成bean的创建
+ Class<?> instanceClass = ClassUtils.forName(name, classLoader);
+ T instance = BeanUtils.instantiateClass(constructor, args);
+
+ ConfigurationWarningsApplicationContextInitializer
+ ContextIdApplicationContextInitializer
+ DelegatingApplicationContextInitializer
+ ServerPortInfoApplicationContextInitializer
+ SharedMetadataReaderFactoryContextInitializer
+ ConditionEvaluationReportLoggingListener
+
+ 随后将所有的listener加载进去
+ 先build--->run
+ ConfigurableApplicationContext
+ 中加载
+org.springframework.boot.context.event.EventPublishingRunListener、、、、
+
+allListeners
+LoggingApplicationListener
+BackgroundPreinitializer
+DelegatingApplicationListener
+LiquibaseServiceLocatorApplicationListener
+
+
+
 
 
