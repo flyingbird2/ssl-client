@@ -37,8 +37,8 @@ public class SslClientApplication {
 	public static void main(String[] args) {
 		new SpringApplicationBuilder()
 				.sources(SslClientApplication.class)
-                /*.bannerMode(Banner.Mode.OFF)
-                .web(WebApplicationType.NONE)*/
+                .bannerMode(Banner.Mode.OFF)
+                .web(WebApplicationType.NONE)
 				.run(args);
 	}
 
