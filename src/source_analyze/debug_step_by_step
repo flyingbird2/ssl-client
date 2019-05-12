@@ -2,6 +2,7 @@
 ，
 1、1 SpringApplicationBuilder中2个变量SpringApplication application和变量ConfigurableApplicationContext context是什么关系？
 在一开始从main方法进入的时候，以上2个变量都是为空的
+context 是容器
 
  private Class<? extends StandardEnvironment> deduceEnvironmentClass() { 把日志都处理好了
  然后才进入创建SpringApplication，初始化一些默认值
@@ -53,6 +54,16 @@ LiquibaseServiceLocatorApplicationListener
 
 context 给的默认值
 ConfigurableApplicationContext org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext
+
+environment
+A PropertySource is a simple abstraction over any source of key-value pairs,
+and Spring’s StandardEnvironment is configured with two PropertySource objects — 
+one representing the set of JVM system properties (System.getProperties())
+and one representing the set of system environment variables (System.getenv()).
+
+会处理：
+ApplicationRunner
+CommandLineRunner
 
 
 
