@@ -39,7 +39,7 @@ public class SslClientApplication {
 				.sources(SslClientApplication.class)
                 .bannerMode(Banner.Mode.OFF)
                 .web(WebApplicationType.NONE)
-				.run(args);
+				.run(args);//
 	}
 
 	@Bean
