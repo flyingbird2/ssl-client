@@ -47,6 +47,7 @@ public class SslClientApplication {
 		SSLContext sslContext = null;
 		try {
 			sslContext = SSLContextBuilder.create()
+					.setKeyStoreType("PKCS12")
 					// 会校验证书
 					.loadTrustMaterial(keyStore.getURL(), keyPass.toCharArray())
 					// 放过所有证书校验
