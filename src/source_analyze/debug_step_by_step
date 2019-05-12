@@ -51,6 +51,8 @@ BackgroundPreinitializer
 DelegatingApplicationListener
 LiquibaseServiceLocatorApplicationListener
 
+context 给的默认值
+ConfigurableApplicationContext org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext
 
 
 
