@@ -2,6 +2,9 @@ package com.example.sslclient;
 
 import com.example.sslclient.support.CustomConnectionKeepAliveStrategy;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.connector.Connector;
+import org.apache.coyote.http11.Http11Nio2Protocol;
+import org.apache.coyote.http11.Http11NioProtocol;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -13,6 +16,8 @@ import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
+import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.Resource;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
@@ -38,7 +43,7 @@ public class SslClientApplication {
 		new SpringApplicationBuilder()
 				.sources(SslClientApplication.class)
                 .bannerMode(Banner.Mode.OFF)
-                .web(WebApplicationType.NONE)
+                .web(WebApplicationType.SERVLET)
 				.run(args);//
 	}
 
@@ -79,6 +84,36 @@ public class SslClientApplication {
 				.setReadTimeout(Duration.ofMillis(500))
 				.requestFactory(this::requestFactory)
 				.build();
+	}
+
+	@Bean
+	public ServletWebServerFactory servletContainer() {
+		TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory();
+		tomcat.addAdditionalTomcatConnectors(createSslConnector());
+		return tomcat;
+	}
+
+	private Connector createSslConnector() {
+		Connector connector = new Connector("org.apache.coyote.http11.Http11Nio2Protocol");
+		Http11Nio2Protocol protocol = (Http11Nio2Protocol) connector.getProtocolHandler();
+		try {
+			//File keystore = new ClassPathResource("keystore").getFile();
+			//File truststore = new ClassPathResource("keystore").getFile();
+			connector.setScheme("http");
+			connector.setSecure(true);
+			connector.setPort(5001);
+			protocol.setSSLEnabled(false);
+			//protocol.setKeystoreFile(keystore.getAbsolutePath());
+			//protocol.setKeystorePass("changeit");
+			//protocol.setTruststoreFile(truststore.getAbsolutePath());
+			//protocol.setTruststorePass("changeit");
+			//protocol.setKeyAlias("apitester");
+			return connector;
+		}
+		catch (Exception ex) {
+			throw new IllegalStateException("can't access keystore: [" + "keystore"
+					+ "] or truststore: [" + "keystore" + "]", ex);
+		}
 	}
 
 

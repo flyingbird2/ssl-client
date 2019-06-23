@@ -44,6 +44,12 @@
 			<artifactId>httpclient</artifactId>
 			<version>4.5.7</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-quickstart</artifactId>
+			<version>9.4.11.v20180605</version>
+		</dependency>
 	</dependencies>
 
 	<build>
